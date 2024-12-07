@@ -18,7 +18,7 @@ dp = Dispatcher()
 async def send_email(subject, body, attachments=None):
     message = MIMEMultipart()
     message['From'] = smtp_user
-    message['To'] = smtp_user  # Отправляем на тот же email
+    message['To'] = smtp_user  
     message['Subject'] = subject
 
     message.attach(MIMEText(body, 'plain'))
@@ -65,7 +65,6 @@ async def start(message: types.Message):
 @dp.message(Command('send_message'))
 async def send_message(message: types.Message):
     await message.answer("Отправь мне текстовое сообщение, чтобы я отправил его на почту.")
-    # Ожидаем следующее сообщение с текстом
     @dp.message()
     async def handle_text_message(msg: types.Message):
         subject = "Новое сообщение"
